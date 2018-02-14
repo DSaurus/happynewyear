@@ -111,11 +111,12 @@ export default {
   margin-top: 60px;
 }
 .theSaying{
+  top:50%;
   position: absolute;
   z-index: 5;
   left: 10rem;
-  margin-top: 5rem;
-  transform: rotate(5deg);
+  margin-top: -10.5rem;
+  transform: rotate(5.5deg);
 }
 .firstSaying{
   font-weight: bold;
@@ -124,11 +125,12 @@ export default {
   font-size: small;
 }
 .shadow{
-  width: 100%;
-  height: 48rem;
+  width: 48rem;
+  height: 80rem;
   background-color:#000;
   position:absolute;
-  top:0;
+  top:50%;
+  margin-top:-25%;
   left:0;
   z-index:5;
   opacity:0.4;
