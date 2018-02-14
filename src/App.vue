@@ -125,12 +125,11 @@ export default {
   font-size: small;
 }
 .shadow{
-  width: 48rem;
+  width: 80rem;
   height: 80rem;
   background-color:#000;
   position:absolute;
-  top:50%;
-  margin-top:-25%;
+  top:0;
   left:0;
   z-index:5;
   opacity:0.4;
