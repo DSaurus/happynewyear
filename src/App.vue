@@ -1,7 +1,8 @@
 <template>
-  <div id="app" v-show="loading">
+  <div id="app">
     <div class="shadow" v-show="isShadow"></div>
-    <div>
+    <div class="progress-bar" v-if="isShow">加载中！+{{val}}%</div>
+    <div v-if="!isShow">
       <div>
         <div class="dv_00psd_layer_0"></div>
         <div class="group_0"><div class="dv_00psd_layer_1"></div>
@@ -62,9 +63,10 @@ export default {
   name: 'App',
   data: function () {
     return{
-      loading: false,
+      isShow: true,
       isShadow: false,
       theName: '',
+      val: 0,
       isHidden: false,
       sayingList: [],
       sayingUser: '',
@@ -72,6 +74,20 @@ export default {
       sayingWords: '狗年大吉！愿你抱着平安，带着财运，拽着吉祥，迈入狗年，快乐度过每一天！',
       newWayWord: '开启新旅程'
     }
+  },
+  props: {
+    step: {
+      type: Number,
+      default: 5,
+    },
+    initVal: {
+      type: Number,
+      default: 0,
+    },
+    stopVal: {
+      type: Number,
+      default: 80,
+    },
   },
   methods: {
     newWay: function () {
@@ -107,7 +123,18 @@ export default {
     }
   },
   mounted() {
-    this.loading = true;
+    this.val = this.initVal
+    let step =  this.step
+    let timer = setInterval(() => {
+      this.val = this.val + step
+      this.$el.style.width = this.val + '%'
+      console.log(this.val)
+      if (this.val >= this.stopVal) {
+        clearInterval(timer)
+        this.isShow = false;
+        return
+      }
+    }, 10)
   },
 }
 </script>
@@ -120,6 +147,12 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.progress-bar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #999;
 }
 .theSaying{
   top:50%;
