@@ -86,7 +86,7 @@ export default {
     },
     stopVal: {
       type: Number,
-      default: 80,
+      default: 100,
     },
   },
   methods: {
