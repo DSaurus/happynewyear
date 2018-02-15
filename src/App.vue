@@ -107,7 +107,7 @@ export default {
     }
   },
   mounted() {
-    loading = true;
+    this.loading = true;
   },
 }
 </script>
