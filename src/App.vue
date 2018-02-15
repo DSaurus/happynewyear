@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-show="loading">
     <div class="shadow" v-show="isShadow"></div>
     <div>
       <div>
@@ -20,7 +20,7 @@
         </div>
         <div class="dv_00psd_layer_12"></div>
 
-        <div class="newWay"  v-on:click="newWay" v-show="!isHidden">开启新旅程</div>
+        <div class="newWay"  v-on:click="newWay">{{newWayWord}}</div>
         <div class="inputWindow" v-show="isShadow">
           <div class="inputTip">您的名字是？</div>
           <input class="inputText" v-model="theName"/>
@@ -62,12 +62,15 @@ export default {
   name: 'App',
   data: function () {
     return{
+      loading: false,
       isShadow: false,
       theName: '',
       isHidden: false,
       sayingList: [],
       sayingUser: '',
-      sayingWords: '狗年大吉！愿你抱着平安，带着财运，拽着吉祥，迈入狗年，快乐度过每一天！'
+      defaultSayingWords: '狗年大吉！愿你抱着平安，带着财运，拽着吉祥，迈入狗年，快乐度过每一天！',
+      sayingWords: '狗年大吉！愿你抱着平安，带着财运，拽着吉祥，迈入狗年，快乐度过每一天！',
+      newWayWord: '开启新旅程'
     }
   },
   methods: {
@@ -76,6 +79,11 @@ export default {
     },
     theChange: function() {
       if(this.theName === ''){
+        return;
+      }
+      if(this.isHidden === true){
+        this.isShadow = false;
+        this.afterChange();
         return;
       }
       this.isShadow = false;
@@ -87,17 +95,20 @@ export default {
       })
     },
     afterChange: function () {
-      console.log(this.sayingList);
       this.sayingUser = this.theName;
+      this.newWayWord = '再次开启！';
+      this.sayingWords = this.defaultSayingWords;
       var _this = this;
       this.sayingList.forEach(function (value) {
-        console.log(value)
         if(_this.theName.match(value.name)){
           _this.sayingWords = value.words;
         }
       })
     }
-  }
+  },
+  mounted() {
+    loading = true;
+  },
 }
 </script>
 
