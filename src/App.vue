@@ -29,7 +29,7 @@
 
         <div class="theSaying" v-show="isHidden">
           <div class="firstSaying">亲爱的{{sayingUser}}</div>
-          <pre class="mainSaying">{{sayingWords}}</pre>
+          <pre class="mainSaying">&nbsp;&nbsp;{{sayingWords}}</pre>
         </div>
 
 
@@ -67,7 +67,7 @@ export default {
       isHidden: false,
       sayingList: [],
       sayingUser: '',
-      sayingWords: '哇哇哇'
+      sayingWords: '狗年大吉！愿你抱着平安，带着财运，拽着吉祥，迈入狗年，快乐度过每一天！'
     }
   },
   methods: {
@@ -92,7 +92,7 @@ export default {
       var _this = this;
       this.sayingList.forEach(function (value) {
         console.log(value)
-        if(value.name === _this.theName){
+        if(_this.theName.match(value.name)){
           _this.sayingWords = value.words;
         }
       })
@@ -120,10 +120,16 @@ export default {
 }
 .firstSaying{
   font-weight: bold;
+  text-align: left;
 }
 .mainSaying{
-  font-size: small;
+  font-size: 1.2em;
+  width: 15rem;
+  text-align: left;
+  white-space: pre-wrap;
+  word-break: break-all;
 }
+
 .shadow{
   width: 80rem;
   height: 80rem;
